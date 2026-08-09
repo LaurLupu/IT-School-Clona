@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clona It School</title>
+    <meta name="description" content="O replica a site-ului itschool.ro"/>
+    <!-- includem fonturile -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<!-- includem iconitele -->
+ <!-- includem iconitele o singura data, corect, pentru toate variantele -->
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+ <!-- includem css-urile noastre -->
+  <link rel="stylesheet" href="CSS/Home.css"/>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo-link">
+        <img src="https://itschool.ro/images/logo-itschool-dark.svg" alt="itschool logo"/>   
+        </a>
+        <div class="menu-icon-container">
+        <span class="material-symbols-outlined menu icon">
+            menu
+        </span>
+        <input type="checkbox"/>
+        <ul class="nav-links">
+            <li class="menu-header-title">Meniu</li>
+
+            <li>
+                <a href="Pagini/Cursuri.html">Cursuri Online</a>
+            </li>
+            <li class="about-us">
+                <input type="checkbox" id="sub-menu-checkbox" class="sub-menu-cb">
+                <label for="sub-menu-checkbox" class="about-link-mobile">
+                    Despre noi
+                    <span class="material-symbols-outlined arrow-down-icon">arrow_drop_down</span>
+                </label> 
+                <a href="Pagini/Despre noi.html" class="about-link-desktop">
+                    Despre noi
+                    <span class="material-symbols-outlined arrow-down-icon">arrow_drop_down</span>
+                </a> 
+                
+                <!-- Submeniul poziționat corect în interior -->
+                <div class="submenu">
+                    <label for="sub-menu-checkbox" class="back-btn">
+                        <span class="material-symbols-outlined">arrow_back</span> Inapoi
+                    </label>
+                    <span class="submenu-title">Despre noi</span>
+                    <a href="Index.html">It School</a>
+                    <a href="Pagini/Despre noi.html">Certificari</a>
+                </div>
+            </li>
+            <li>
+                <a href="Pagini/Contact.html">Contact</a>
+            </li>
+        </ul>
+    </div>
+    </nav>
+   <section class="welcome">
+        <div class="container">
+         <h1>Bine ai venit</h1>
+         <p>Accelerator de cariere in <span>{<span>web development</span>}</span></p>
+         <p>
+            Cursuri IT pt incepatori cu certificare
+            <img src="Imagini/Unity.png" alt="Unity" />
+            <img src="Imagini/Android.svg.webp" alt="Android" />
+            <img src="Imagini/Unreal Engine.png" alt="Unreal Engine" />
+            <img src="Imagini/Ministerul Educatiei.png" alt="Ministerul educatiei" />
+         </p>
+         <a href="Pagini/Cursuri.html">Afla mai multe</a>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p> It School © 2026</p>
+        </div>
+    </footer>
+    <script>
+    const menuCheckbox = document.querySelector('nav input[type="checkbox"]');
+    const subMenuCheckbox = document.getElementById('sub-menu-checkbox');
+    const submenuElement = document.querySelector('nav .submenu');
+    
+    if (menuCheckbox && subMenuCheckbox) {
+        menuCheckbox.addEventListener('change', function() {
+            if (!this.checked) {
+                // Când închidem meniul principal, debifăm sub-meniul și resetăm poziția
+                subMenuCheckbox.checked = false;
+                if (submenuElement) {
+                    submenuElement.style.transform = 'translateX(100%)';
+                }
+            }
+        });
+    }
+
+    // Asigurăm tranziția curată și la apăsarea butonului "Inapoi" sau a checkbox-ului de sub-meniu
+    if (subMenuCheckbox && submenuElement) {
+        subMenuCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                submenuElement.style.transform = 'translateX(-100%)';
+            } else {
+                submenuElement.style.transform = 'translateX(100%)';
+            }
+        });
+    }
+</script>
+</body>
+</html>
