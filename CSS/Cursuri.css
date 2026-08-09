@@ -1,0 +1,562 @@
+/* adaugam variabilele */
+:root {
+    --text-primary: #101d42;
+    --text-secondary: #4cf5fb;
+    --text-dark: #2b2922;
+    --text-light: #eaeaea;
+    --text-white: #ffffff;
+    --text-turquoise: #4cf5fb;
+
+    --bg-primary: #141e4c;
+    --bg-secondary: #dfedf5;
+    --bg-dark: #101d42;
+    --bg-light: #eaeaea;
+
+    --fs-large: 1rem;
+    --fs-medium: 0.875rem;
+    --fs-small: 0.75rem;
+
+    --spacing-xl: 2.625rem;
+    --spacing-large: 1.75rem;
+    --spacing-medium: 1rem;
+    --spacing-small: 0.5rem;
+    --spacing-tiny: 0.25rem;
+
+    --button-color: #2ae88f;
+    --button-hover-color: #1409da;
+}
+
+/* resetam proprietatiile default */
+* {
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, p {
+   margin: 0;
+   padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+/* adaugam proprietati de font */
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+h1 { font-size: 3.5rem; color: var(--text-light); }
+h2 { font-size: 1.75rem; color: var(--text-primary); }
+h3 { font-size: 1.5rem; color: var(--text-secondary); }
+p { font-size: var(--fs-medium); color: var(--text-dark); }
+
+/* clase reutilizabile */
+.container {
+    max-width: 1200px;
+    min-width: 320px;
+    margin: auto;
+    padding: var(--spacing-medium);
+}
+
+/* layout */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* sitlizarea nav-ului */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--bg-primary);
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-medium) 5%;
+}
+
+nav .logo-link {
+    padding: 0;
+}
+
+nav img {
+    width: auto;
+    height: 50px;
+}
+
+/* Ascundem elementele exclusive de mobil pe PC */
+nav .menu.icon,
+nav input[type="checkbox"],
+nav .sub-menu-cb,
+nav .about-link-mobile,
+nav .back-btn,
+nav .menu-header-title,
+nav .submenu-title {
+    display: none;
+}
+
+nav .menu-icon-container {
+    display: flex;
+    align-items: center;
+}
+
+/* -------------------------------------------- */
+/*            STILIZARE PENTRU DESKTOP          */
+/* -------------------------------------------- */
+nav ul {
+    display: flex;
+}
+
+nav li {
+    position: relative;
+}
+
+nav ul a {
+    font-size: var(--fs-small);
+    text-transform: uppercase;
+    color: var(--text-light);
+    padding: var(--spacing-small) var(--spacing-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px;
+}
+
+nav ul a:hover {
+    color: var(--text-turquoise);
+    background-color: var(--button-hover-color);
+}
+
+nav .arrow-down-icon {
+    font-size: var(--fs-large);
+    display: inline-block;
+}
+
+/* Sub-meniul pe PC - setat strict pentru desktop */
+nav li.about-us .submenu {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-primary);
+    min-width: 130px;
+    padding: var(--spacing-small) 0;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+nav li.about-us .submenu a {
+    justify-content: center;
+}
+
+nav li.about-us:hover .submenu {
+    display: flex;
+}
+
+/* -------------------------------------------- */
+/*             STILIZARE PENTRU MOBIL           */
+/* -------------------------------------------- */
+@media (max-width: 768px) {
+    nav img {
+        height: 40px;
+    }
+
+    nav a {
+        border-radius: 0;
+    }
+
+    nav a:hover {
+        background-color: transparent;
+        color: var(--text-white);
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    nav .menu.icon {
+        display: block;
+        color: #ffffff;
+    }
+
+    nav .arrow-down-icon {
+        display: none;
+    }
+
+    nav .menu-icon-container {
+        position: relative;
+    }
+
+    nav .menu-icon-container > input[type="checkbox"] {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        margin: 0;
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    nav .sub-menu-cb {
+        display: none !important;
+    }
+
+    /* Meniul principal pe mobil: ocupă 50% din ecran în dreapta */
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        position: fixed;
+        top: calc(40px + 2 * var(--spacing-medium));
+        right: 0;
+        left: auto;
+        bottom: 0;
+        background-color: var(--bg-primary);
+        padding: var(--spacing-medium) 0;
+        overflow-x: hidden;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+    }
+
+    nav input[type="checkbox"]:checked ~ ul {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        position: static;
+    }
+
+    nav ul a {
+        display: inline-block;
+        justify-content: center;
+        text-align: center;
+        width: 85%; 
+        margin: 0 auto; 
+        padding: var(--spacing-small);
+        border-radius: 20px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    nav ul a:hover {
+        background-color: var(--button-hover-color);
+        color: var(--text-turquoise);
+    }
+
+    nav .about-link-desktop {
+        display: none;
+    }
+
+    nav .about-link-mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 85%;
+        margin: 0 auto;
+        padding: var(--spacing-small);
+        font-size: var(--fs-small);
+        text-transform: uppercase;
+        color: var(--text-light);
+        cursor: pointer;
+        border-radius: 20px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    nav .about-link-mobile:hover {
+        background-color: var(--button-hover-color);
+        color: var(--text-turquoise);
+    }
+
+    nav input[type="checkbox"]:checked ~ ul .menu-header-title {
+        display: block;
+        text-align: center;
+        font-size: var(--fs-medium);
+        text-transform: uppercase;
+        color: var(--text-turquoise);
+        letter-spacing: 1px;
+        padding: var(--spacing-small) 0;
+        margin-bottom: var(--spacing-small);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    nav .submenu-title {
+        display: block;
+        text-align: center;
+        font-size: var(--fs-medium);
+        text-transform: uppercase;
+        color: var(--text-turquoise);
+        padding: var(--spacing-small) 0;
+        margin-bottom: var(--spacing-small);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        letter-spacing: 1px;
+    }
+
+    /* Sub-meniul pe mobil: izolat și controlat prin checkbox */
+    nav li.about-us .submenu {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding-top: var(--spacing-medium);
+        background-color: var(--bg-primary); 
+        flex-direction: column;
+        box-shadow: none;
+        border-radius: 0;
+        transition: transform 0.3s ease-in-out;
+        z-index: 10;
+        align-items: center;
+        overflow-x: hidden;
+        transform: translateX(100%); 
+    }
+
+    nav .sub-menu-cb:checked ~ .submenu {
+        transform: translateX(0) !important;
+    }
+
+    nav li.about-us .submenu a {
+        display: inline-block;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--text-light);
+        width: 85%;
+        margin: 0 auto;
+        padding: var(--spacing-small);
+        border-radius: 20px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    nav li.about-us .submenu a:hover {
+        background-color: var(--button-hover-color);
+        color: var(--text-turquoise);
+    }
+
+    nav .back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-small);
+        color: var(--button-color);
+        font-size: var(--fs-small);
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: var(--spacing-small);
+        width: 85%;
+        margin: 0 auto;
+        margin-bottom: var(--spacing-small);
+        border: none !important;
+        border-radius: 35px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    nav .back-btn:hover {
+        background-color: var(--button-hover-color);
+        color: var(--text-turquoise);
+    }
+}
+
+.course-btn {
+    background-color: var(--button-color);
+    color: var(--text-dark);
+    border: none;
+    padding: var(--spacing-small) var(--spacing-medium);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--fs-small);
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: var(--spacing-medium);
+    display: inline-block;
+}
+
+.course-btn:hover {
+    background-color: var(--button-hover-color);
+    color: var(--text-turquoise);
+}
+
+/* -------------------------------------------- */
+/*            STILIZARE SECȚIUNE CURSURI        */
+/* -------------------------------------------- */
+.courses {
+    padding: 120px 5% 60px 5%; /* Am mărit spațiul de sus pe PC ca să nu mai fie acoperit de nav */
+    background-color: var(--bg-secondary);
+    flex-grow: 1;
+}
+
+.container-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container-grid h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-large);
+    color: var(--text-primary);
+}
+
+.courses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-large);
+}
+
+.courses-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.course {
+    background-color: var(--text-white);
+    border-radius: 15px;
+    padding: var(--spacing-large);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.course:hover {
+    transform: translateY(-5px);
+}
+
+.course .content h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-small);
+}
+
+.badges {
+    display: flex;
+    gap: var(--spacing-medium);
+    margin-top: var(--spacing-small);
+    font-size: var(--fs-small);
+    color: var(--text-dark);
+}
+
+.badges span {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+}
+
+.course-btn {
+    background-color: var(--button-color);
+    color: var(--text-dark);
+    border: none;
+    padding: var(--spacing-small) var(--spacing-medium);
+    font-family: "Poppins", sans-serif;
+    font-size: var(--fs-small);
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: var(--spacing-medium);
+    align-self: flex-start;
+}
+
+.course-btn:hover {
+    background-color: var(--button-hover-color);
+    color: var(--text-turquoise);
+}
+
+/* -------------------------------------------- */
+/*   ADAPTĂRI EXCLUSIVE PENTRU MOBIL (CURSURI)  */
+/* -------------------------------------------- */
+@media (max-width: 768px) {
+    .courses {
+        padding: 100px 15px 40px 15px; /* Oferă aer pe lateral pe ecranele mici */
+    }
+
+    .courses-container {
+        grid-template-columns: 1fr; /* O singură coloană pe mobil pe lățime corectă */
+        gap: var(--spacing-medium);
+    }
+
+    .course {
+        max-width: 100%; /* Casetele nu vor mai părea uriașe, se adaptează frumos */
+        padding: var(--spacing-medium);
+    }
+}
+
+/* -------------------------------------------- */
+/*   ADAPTĂRI EXCLUSIVE PENTRU MOBIL (CURSURI)  */
+/* -------------------------------------------- */
+@media (max-width: 768px) {
+    .courses {
+        padding: 90px 15px 30px 15px;
+    }
+
+    .container-grid h2 {
+        margin-bottom: var(--spacing-medium);
+    }
+
+    .courses-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centrează casetele pe ecran */
+        gap: var(--spacing-medium);
+    }
+
+    .courses-wrapper {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .course {
+        width: 100%;
+        max-width: 320px; /* Caseta albă devine mai îngustă și compactă */
+        padding: var(--spacing-medium); /* Păstrăm dimensiunea textului neschimbată */
+    }
+
+    .course-btn {
+        margin-top: var(--spacing-medium);
+    }
+}
+
+/* -------------------------------------------- */
+/*                    FOOTER                    */
+/* -------------------------------------------- */
+footer {
+    background-color: var(--bg-dark);
+}
+
+footer p {
+    font-size: var(--fs-small);
+    text-align: center;
+    color: var(--text-light);
+    padding: var(--spacing-medium) 0;
+}
