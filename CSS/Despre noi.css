@@ -125,7 +125,7 @@ nav ul a {
     font-size: var(--fs-small);
     text-transform: uppercase;
     color: var(--text-light);
-    padding: var(--spacing-small) var(--spacing-medium);
+    padding: var(--spacing60p50pxmall) var(--spacing-medium);
     display: flex;
     align-items: center;
     gap: var(--spacing-tiny);
@@ -486,36 +486,24 @@ nav li.about-us:hover .submenu {
     filter: grayscale(0%) opacity(100%);
     transform: scale(1.05);
 }
-
-/* -------------------------------------------- */
-/*   ADAPTĂRI PENTRU MOBIL (PARTENERI)          */
-/* -------------------------------------------- */
+/* Optimizare specială pentru Mobil (ecran mai mic de 768px) - 2 rânduri */
 @media (max-width: 768px) {
-    .partners {
-        padding: 40px 15px;
-    }
-
-    .partners h2 {
-        font-size: 1.4rem;
-        margin-bottom: var(--spacing-medium);
-    }
-
-    /* Pe mobil transformăm în 2 coloane, creând automat 5 rânduri sau menținem 2 rânduri cu câte 5 înghesuite. 
-       Ca să arate bine pe 2 rânduri și pe mobil, setăm o grilă de 5 coloane cu scroll orizontal fin SAU 3 coloane */
-       
     .partners-parteners {
-        grid-template-columns: repeat(5, minmax(70px, 1fr)); /* Păstrăm pe 2 rânduri (5 pe rând) */
-        gap: var(--spacing-small);
-        overflow-x: auto; /* Permite glisarea fină pe ecrane foarte înguste dacă e nevoie */
-        padding-bottom: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 coloane = 2 rânduri principale */
+        gap: 20px;
+        padding: 0 20px;
+        max-width: 100%;
     }
 
-    /* Dimensiunea logo-urilor pe mobil (mai mari decât înainte, dar potrivite pentru ecran mic) */
     .partners-parteners img {
-        height: 60px; 
+        width: 100%;
+        max-width: 130px; /* Logo-uri mai mari și mai vizibile pe telefon */
+        height: 45px;     /* Înălțime potrivită pentru 2 rânduri */
+        object-fit: contain;
+        filter: grayscale(100%) opacity(80%);
     }
 }
-
 /* -------------------------------------------- */
 /*                    FOOTER                    */
 /* -------------------------------------------- */
@@ -524,8 +512,20 @@ footer {
 }
 
 footer p {
-    font-size: var(--fs-small);
+    font-size: var(--fs-large);
     text-align: center;
     color: var(--text-light);
     padding: var(--spacing-medium) 0;
+}
+
+/* Asigurăm că pagina ocupă cel puțin tot ecranul și footer-ul stă la bază */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Forțează conținutul principal să ocupe tot spațiul rămas liber */
 }
