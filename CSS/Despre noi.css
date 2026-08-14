@@ -125,7 +125,7 @@ nav ul a {
     font-size: var(--fs-small);
     text-transform: uppercase;
     color: var(--text-light);
-    padding: var(--spacing60p50pxmall) var(--spacing-medium);
+    padding: var(--spacing-small) var(--spacing-medium); /* Am corectat variabila de padding */
     display: flex;
     align-items: center;
     gap: var(--spacing-tiny);
